@@ -1,6 +1,50 @@
+public class GiftCard{
+    private String codigo;
+    private double saldo;
 
+    public GiftCard(String codigo, double saldo) {
+        this.codigo = codigo;
+        this.saldo = saldo;
+    }
 
+    public boolean descontarSaldo(double monto){
+        if (monto <= saldo){
+            saldo = saldo - monto;
+            System.out.println("La compra se ha realizado con exito");
+            return true;
+        }else{
+            System.out.println("La compra no se ha realizado");
+            return false;
+        }
+    }
+}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+public class Cliente {
+    private String nombre;
+    private GiftCard tarjeta;
 
+    public Cliente(String nombre, GiftCard tarjeta) {
+        this.nombre = nombre;
+        this.tarjeta = tarjeta;
+    }
+    public void realizarCompra(double monto) {
+        this.tarjeta.descontarSaldo(monto);
+    }
+}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+public class Main {
+    public static void main(String[] args){
+        GiftCard tarjeta1 = new GiftCard("AB-100", 5000.0);
+        Cliente cliente1 = new Cliente("Jorge", tarjeta1);
+
+        GiftCard tarjeta2 = new GiftCard("YZ-670", 670.0);
+        Cliente cliente2 = new Cliente("Nicolas", tarjeta2);
+
+        cliente1.realizarCompra(350.0);
+        cliente2.realizarCompra(1500.0);
+    }
+}
